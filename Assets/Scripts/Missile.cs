@@ -20,7 +20,17 @@ public class Missile : MonoBehaviour
     // 3
     IEnumerator deathTimer()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
+    }
+
+    void OnCollisionEnter(Collision collider)
+    {
+        if (collider.gameObject.GetComponent<Player>() != null
+        && collider.gameObject.tag == "Player")
+        {
+            collider.gameObject.GetComponent<Player>().TakeDamage(damage);
+        }
         Destroy(gameObject);
     }
 }
